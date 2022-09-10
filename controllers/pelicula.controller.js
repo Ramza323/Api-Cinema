@@ -11,8 +11,11 @@ obtenerPeliculasPorId = async (req, res) => {
 
     const connection = await getConnection();
     const id = req.params.id;
-    const response = await connection.request().query(`SELECT * FROM Pelicula WHERE idPelicula = ${id}`);
-    res.send(response.recordset);
+    const response = await connection
+    .request()
+    .input("id", id)
+    .query(`SELECT * FROM Pelicula WHERE idPelicula = @id`);
+    res.send(response.recordset[0]);
 }
 
 insertarPelicula = async (req, res) => {
