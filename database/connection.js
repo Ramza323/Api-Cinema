@@ -38,7 +38,7 @@ async function createQueryMySQL(query) {
   return new Promise((resolve, reject) => {
     connection.query(query, function (error, results, fields) {
       if (error) throw error;
-      return error ? reject(error) : resolve(results[0]);
+      return error ? reject(error) : resolve(results);
     });
   })
 
